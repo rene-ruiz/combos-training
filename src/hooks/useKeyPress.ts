@@ -7,6 +7,10 @@ const useKeyPress = () => {
     setPressedKeys((prevKeys) => [...prevKeys, event.key]);
   }, []);
 
+  const resetPressedKeys = useCallback(() => {
+    setPressedKeys([]);
+  }, []);
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -14,7 +18,7 @@ const useKeyPress = () => {
     };
   }, [handleKeyDown]);
 
-  return pressedKeys;
+  return { pressedKeys, resetPressedKeys };
 };
 
 export default useKeyPress;
